@@ -20,10 +20,9 @@ if (isset($_POST['SendMail'])) {
     $mail->Username = 'noreply@ezana.org';
     $mail->Password = 'No_Reply@Ezana.Org';
     if (!$mail->send()) {
-        echo "Mail Not Send ";
-        echo 'Email error: ' . $mail->ErrorInfo;
+        $err = "Mail Not Send, $mail->ErrorInfo";
     } else {
-        echo "Mail Send";
+        $success =  "Mail Send";
     }
 }
 ?>
@@ -48,7 +47,21 @@ if (isset($_POST['SendMail'])) {
             <div class="card-hea text-center">
                 <h5>Ezana Mailer</h5>
             </div>
-
+            <!-- Alerts -->
+            <?php if (isset($success)) { ?>
+                <!--This code for injecting success alert-->
+                <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                    <strong>Success! </strong> <br> <?php echo $success; ?>
+                    <button class="close" type="button" data-dismiss="alert" aria-label="Close"><span class="font-weight-light" aria-hidden="true">×</span></button>
+                </div>
+            <?php }
+            if (isset($err)) { ?>
+                <!--This code for injecting error alert-->
+                <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                    <strong>Error! </strong> <br> <?php echo $err; ?>
+                    <button class="close" type="button" data-dismiss="alert" aria-label="Close"><span class="font-weight-light" aria-hidden="true">×</span></button>
+                </div>
+            <?php } ?>
             <div class="card-body">
                 <form method="POST">
                     <div class="row">
